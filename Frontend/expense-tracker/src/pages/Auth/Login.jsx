@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import AuthLayout from '../../components/layouts/AuthLayout';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Inputs/input';
+import { validateEmail } from '../../utils/helper';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -13,7 +14,19 @@ const Login = () => {
   // Handle Login form submission.
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your login logic here
+
+    if(!validateEmail(email)){
+      setError("Please enter a valid email");
+      return;
+    }
+
+    if(!password){
+      setError("Please enter your password");
+      return;
+    }
+
+    setError("");
+    
   };
 
   return (
@@ -39,7 +52,19 @@ const Login = () => {
             placeholder="Enter your password"
             type="password"
           />
-          <button type="submit" className="mt-4 btn btn-primary">Login</button>
+
+          {error && <p className="text-red-500 text-xs pb-2.5">{error}</p> }
+
+          <button type='submit' className='btn-primary cursor-pointer'>
+            LOGIN
+          </button>
+
+          <p className='text-[13px] text-slate-800 mt-3'>
+            Don't have an account?{' '}
+            <Link className='font-medium text-primary underline' to="/signUp">
+              Sign Up
+            </Link>
+          </p>
         </form>
       </div>
     </AuthLayout>
