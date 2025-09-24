@@ -46,3 +46,4 @@ const Root = () => {
     <Navigate to="/login" />
   );
 }
+
