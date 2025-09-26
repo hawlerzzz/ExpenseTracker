@@ -1,4 +1,4 @@
-# ExpenseTracker
+# Peak Finance
 
  Work in progress
  
